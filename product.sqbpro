@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="product.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="3570"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="products" custom_title="0" dock_id="1" table="4,8:mainproducts"/><dock_state state="000000ff00000000fd00000001000000020000024900000213fc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000002490000011e00ffffff000002490000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="category" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="78"/><column index="2" value="94"/><column index="3" value="88"/><column index="4" value="202"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="login_authentication" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="78"/><column index="2" value="148"/><column index="3" value="148"/><column index="4" value="70"/><column index="5" value="58"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="product_category" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="71"/><column index="2" value="76"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="product_images" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="60"/><column index="2" value="71"/><column index="3" value="64"/><column index="4" value="68"/><column index="5" value="84"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="products" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="85"/><column index="2" value="273"/><column index="3" value="296"/><column index="4" value="46"/><column index="5" value="91"/><column index="6" value="47"/><column index="7" value="85"/><column index="8" value="54"/><column index="9" value="148"/><column index="10" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">-- ============================================================
+--  NOCH Marketplace -- Products Component SQL Schema
+--  Designed for SQLite (compatible with MySQL with minor changes)
+--  Author: Products Component
+-- ============================================================
+
+PRAGMA foreign_keys = ON;
+
+-- ============================================================
+-- 1. LOGIN / AUTHENTICATION
+--    Required by: Products (staff login to manage products)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS login_authentication (
+    user_id         TEXT PRIMARY KEY,               -- e.g. USR-00001
+    email           TEXT NOT NULL UNIQUE,
+    password_hash   TEXT NOT NULL,
+    role            TEXT NOT NULL CHECK (role IN ('Customer', 'Staff')),
+    is_active       INTEGER NOT NULL DEFAULT 1      -- 1 = active, 0 = inactive
+);
+
+-- ============================================================
+-- 2. CATEGORY
+--    Products can belong to one or more categories
+-- ============================================================
+CREATE TABLE IF NOT EXISTS category (
+    category_id     TEXT PRIMARY KEY,               -- e.g. CAT-00001
+    category_name   TEXT NOT NULL UNIQUE,
+    category_type   TEXT NOT NULL CHECK (category_type IN ('Men', 'Women', 'Unisex')),
+    description     TEXT
+);
+
+-- Seed the standard categories from the React source
+INSERT OR IGNORE INTO category VALUES ('CAT-00001', 'Tops',        'Unisex', 'Tops and shirts');
+INSERT OR IGNORE INTO category VALUES ('CAT-00002', 'Bottoms',     'Unisex', 'Trousers, shorts, jeans');
+INSERT OR IGNORE INTO category VALUES ('CAT-00003', 'Dresses',     'Women',  'Dresses and skirts');
+INSERT OR IGNORE INTO category VALUES ('CAT-00004', 'Outerwear',   'Unisex', 'Coats, jackets, blazers');
+INSERT OR IGNORE INTO category VALUES ('CAT-00005', 'Accessories', 'Unisex', 'Jewellery, belts, scarves');
+
+-- ============================================================
+-- 3. PRODUCTS  (core table for this component)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS products (
+    product_id      TEXT PRIMARY KEY,               -- e.g. NOCH-00001
+    product_name    TEXT NOT NULL UNIQUE,           -- must be unique, not null
+    description     TEXT,
+    price           REAL NOT NULL CHECK (price &gt; 0),           -- positive number
+    stock_quantity  INTEGER NOT NULL CHECK (stock_quantity &gt;= 0), -- non-negative
+    gender          TEXT NOT NULL CHECK (gender IN ('Men', 'Women', 'Unisex')),
+    color           TEXT NOT NULL,
+    activity        TEXT NOT NULL DEFAULT 'Active'
+                    CHECK (activity IN ('Active', 'Inactive')), -- active/inactive
+    category        TEXT NOT NULL,                  -- comma-separated display value
+    image           TEXT                            -- primary image URL (VARCHAR 500)
+);
+
+-- ============================================================
+-- 4. PRODUCT_IMAGES
+--    One product can have 1–4 images
+-- ============================================================
+CREATE TABLE IF NOT EXISTS product_images (
+    image_id        TEXT PRIMARY KEY,               -- e.g. IMG-00001
+    product_id      TEXT NOT NULL,
+    image_url       TEXT NOT NULL CHECK (LENGTH(image_url) &lt;= 900),
+    is_primary      INTEGER NOT NULL DEFAULT 0 CHECK (is_primary IN (0, 1)),
+    display_order   INTEGER NOT NULL DEFAULT 1 CHECK (display_order BETWEEN 1 AND 4),
+
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- Each product can have at most 4 images (enforced by trigger)
+CREATE TRIGGER IF NOT EXISTS trg_max_4_images
+BEFORE INSERT ON product_images
+BEGIN
+    SELECT CASE
+        WHEN (SELECT COUNT(*) FROM product_images
+              WHERE product_id = NEW.product_id) &gt;= 4
+        THEN RAISE(ABORT, 'A product cannot have more than 4 images.')
+    END;
+END;
+
+-- Each product must have at least 1 image (enforced by trigger on delete)
+CREATE TRIGGER IF NOT EXISTS trg_min_1_image
+BEFORE DELETE ON product_images
+BEGIN
+    SELECT CASE
+        WHEN (SELECT COUNT(*) FROM product_images
+              WHERE product_id = OLD.product_id) &lt;= 1
+        THEN RAISE(ABORT, 'A product must have at least 1 image.')
+    END;
+END;
+
+-- ============================================================
+-- 5. PRODUCT_CATEGORY  (many-to-many junction)
+--    Links products to one or more categories
+-- ============================================================
+CREATE TABLE IF NOT EXISTS product_category (
+    product_id      TEXT NOT NULL,
+    category_id     TEXT NOT NULL,
+
+    PRIMARY KEY (product_id, category_id),
+
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- 6. INVENTORY / WAREHOUSE
+--    Tracks stock per product per warehouse
+-- ============================================================
+CREATE TABLE IF NOT EXISTS inventory_warehouse (
+    inventory_id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    warehouse_id        INTEGER NOT NULL,
+    product_id          TEXT NOT NULL,
+    quantity_on_hand    INTEGER NOT NULL DEFAULT 0
+                        CHECK (quantity_on_hand &gt;= 0),  -- no negative stock
+
+    UNIQUE (warehouse_id, product_id),                  -- no duplicate entries
+
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- 7. REVIEW
+--    Customer reviews linked to products
+-- ============================================================
+CREATE TABLE IF NOT EXISTS review (
+    review_id       TEXT PRIMARY KEY,               -- e.g. REV-00001
+    product_id      TEXT NOT NULL,
+    customer_id     TEXT NOT NULL,
+    rating          INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    comment         TEXT,
+    date_posted     TEXT NOT NULL,                  -- ISO date string
+    editable_until  TEXT NOT NULL,                  -- 5 min window (ISO datetime)
+
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- 8. CHECKOUT  (basket/cart items)
+--    References products via product_id
+-- ============================================================
+CREATE TABLE IF NOT EXISTS checkout (
+    basket_item_id  TEXT PRIMARY KEY,               -- e.g. BKT-00001
+    product_id      TEXT NOT NULL,
+    customer_id     TEXT NOT NULL,
+    quantity        INTEGER NOT NULL DEFAULT 1 CHECK (quantity &gt; 0),
+    unit_price      REAL NOT NULL CHECK (unit_price &gt; 0),
+    subtotal        REAL GENERATED ALWAYS AS (quantity * unit_price) VIRTUAL,
+
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- 9. ORDERS  (order header)
+--    References products via order_items
+-- ============================================================
+CREATE TABLE IF NOT EXISTS orders (
+    order_id        INTEGER PRIMARY KEY AUTOINCREMENT,
+    customer_id     TEXT NOT NULL,
+    order_date      TEXT NOT NULL,
+    status          TEXT NOT NULL DEFAULT 'Processing'
+                    CHECK (status IN
+                        ('Processing','Shipped','Delivered','Returned','Cancelled')),
+    total           REAL NOT NULL CHECK (total &gt;= 0)
+);
+
+-- ============================================================
+-- 10. ORDER_ITEMS  (line items — links orders to products)
+-- ============================================================
+CREATE TABLE IF NOT EXISTS order_items (
+    order_item_id   INTEGER PRIMARY KEY AUTOINCREMENT,
+    order_id        INTEGER NOT NULL,
+    product_id      TEXT NOT NULL,
+    quantity        INTEGER NOT NULL CHECK (quantity &gt; 0),
+    unit_price      REAL NOT NULL CHECK (unit_price &gt; 0),
+    subtotal        REAL GENERATED ALWAYS AS (quantity * unit_price) VIRTUAL,
+
+    FOREIGN KEY (order_id)
+        REFERENCES orders(order_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE,
+
+    FOREIGN KEY (product_id)
+        REFERENCES products(product_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
+);
+
+-- ============================================================
+-- INDEXES  (speeds up common queries)
+-- ============================================================
+CREATE INDEX IF NOT EXISTS idx_products_name       ON products(product_name);
+CREATE INDEX IF NOT EXISTS idx_products_activity   ON products(activity);
+CREATE INDEX IF NOT EXISTS idx_products_gender     ON products(gender);
+CREATE INDEX IF NOT EXISTS idx_products_price      ON products(price);
+CREATE INDEX IF NOT EXISTS idx_product_images_pid  ON product_images(product_id);
+CREATE INDEX IF NOT EXISTS idx_product_cat_pid     ON product_category(product_id);
+CREATE INDEX IF NOT EXISTS idx_product_cat_cid     ON product_category(category_id);
+CREATE INDEX IF NOT EXISTS idx_review_pid          ON review(product_id);
+CREATE INDEX IF NOT EXISTS idx_checkout_pid        ON checkout(product_id);
+CREATE INDEX IF NOT EXISTS idx_order_items_pid     ON order_items(product_id);
+CREATE INDEX IF NOT EXISTS idx_inventory_pid       ON inventory_warehouse(product_id);
+
+-- ============================================================
+-- SAMPLE SEED DATA  (21 products from the application)
+-- ============================================================
+INSERT OR IGNORE INTO login_authentication VALUES
+    ('USR-00001', 'admin@noch.com',        'hashed_staff123',    'Staff',    1),
+    ('USR-00002', 'customer@gmail.com',    'hashed_customer123', 'Customer', 1);
+
+INSERT OR IGNORE INTO products VALUES
+('NOCH-00001','Men''s Stainless Steel Bracelet', 'A sleek stainless steel bracelet.',         39.00, 50,  'Men',   'Silver',     'Active', 'Men, Accessories', 'https://images.unsplash.com/photo-1708389828508-51fb95360cef?w=600'),
+('NOCH-00002','Women''s Satin Evening Dress',    'Luxurious emerald satin dress.',            142.00,25,  'Women', 'Emerald',    'Active', 'Women, Dresses',   'https://images.unsplash.com/photo-1667526512546-4710d79a9f4d?w=600'),
+('NOCH-00003','Women''s Crystal Drop Earrings',  'Delicate crystal drop earrings.',           27.00, 100, 'Women', 'Silver',     'Active', 'Women, Accessories','https://images.unsplash.com/photo-1685524820989-5b822999d8db?w=600'),
+('NOCH-00004','Men''s Urban Cargo Pants',        'Modern olive cargo pants.',                 74.00, 40,  'Men',   'Olive',      'Active', 'Men, Bottoms',     'https://images.unsplash.com/photo-1754903134409-6a59d908cc75?w=600'),
+('NOCH-00005','Women''s High-Waist Linen Trousers','Breathable high-waist linen trousers.',  68.00, 35,  'Women', 'Beige',      'Active', 'Women, Bottoms',   'https://images.unsplash.com/photo-1638396637969-956ca903df87?w=600'),
+('NOCH-00006','Women''s Soft Knit Sweater',      'Cosy cream knit sweater.',                  52.00, 60,  'Women', 'Cream',      'Active', 'Women, Tops',      'https://images.unsplash.com/photo-1603906650843-b58e94d9df4d?w=600'),
+('NOCH-00007','Men''s Casual Button-Down Shirt', 'Classic blue button-down shirt.',           44.00, 75,  'Men',   'Blue',       'Active', 'Men, Tops',        'https://images.unsplash.com/photo-1573662073208-1f58a071c756?w=600'),
+('NOCH-00008','Women''s Floral Casual Dress',    'Light floral print casual dress.',          116.00,20,  'Women', 'Floral',     'Active', 'Women, Dresses',   'https://images.unsplash.com/photo-1678883643221-08061ee6f1aa?w=600'),
+('NOCH-00009','Men''s Tailored Formal Trousers', 'Slim-cut charcoal formal trousers.',        85.00, 30,  'Men',   'Charcoal',   'Active', 'Men, Bottoms',     'https://images.unsplash.com/photo-1760616172899-0681b97a2de3?w=600'),
+('NOCH-00010','Men''s Heritage Leather Belt',    'Full-grain leather belt.',                  33.00, 80,  'Men',   'Brown',      'Active', 'Men, Accessories', 'https://images.unsplash.com/photo-1721483246145-d5b82d10e3e7?w=600'),
+('NOCH-00011','Women''s Satin Slip Dress',       'Elegant blush satin slip dress.',           128.00,15,  'Women', 'Blush',      'Active', 'Women, Dresses',   'https://images.unsplash.com/photo-1650562816756-0e7f15d14343?w=600'),
+('NOCH-00012','Men''s Classic Chinos',           'Timeless navy chinos.',                     64.00, 55,  'Men',   'Navy',       'Active', 'Men, Bottoms',     'https://images.unsplash.com/photo-1718590812273-4b0e0406a27c?w=600'),
+('NOCH-00013','Men''s Slim-Fit Oxford Shirt',    'Crisp white Oxford shirt.',                 56.00, 90,  'Men',   'White',      'Active', 'Men, Tops',        'https://images.unsplash.com/photo-1601460588655-109bd38204db?w=600'),
+('NOCH-00014','Women''s Boho Layered Bracelet',  'Bohemian layered bracelet set.',            22.00, 120, 'Women', 'Multi',      'Active', 'Women, Accessories','https://images.unsplash.com/photo-1644980379438-60fdfafb8e9c?w=600'),
+('NOCH-00015','Women''s High-Waist Denim Shorts','Classic light-wash denim shorts.',          41.00, 45,  'Women', 'Light Wash', 'Active', 'Women, Bottoms',   'https://images.unsplash.com/photo-1696889450800-e94ec7a32206?w=600'),
+('NOCH-00016','Women''s Minimal Gold Necklace',  'Delicate gold chain necklace.',             48.00, 200, 'Women', 'Gold',       'Active', 'Women, Accessories','https://images.unsplash.com/photo-1625792508300-0e1f913a3a50?w=600'),
+('NOCH-00017','Men''s Rustic Leather Wristband', 'Handcrafted rustic leather wristband.',     25.00, 65,  'Men',   'Dark Brown', 'Active', 'Men, Accessories', 'https://images.unsplash.com/photo-1759401909241-f554229ed260?w=600'),
+('NOCH-00018','Men''s Summer Linen Shirt',       'Breathable beige linen shirt.',             49.00, 70,  'Men',   'Beige',      'Active', 'Men, Tops',        'https://images.unsplash.com/photo-1651895884377-5f631be84282?w=600'),
+('NOCH-00019','Women''s Tailored Wide-Leg Trousers','Elegant wide-leg trousers.',             72.00, 28,  'Women', 'White',      'Active', 'Women, Bottoms',   'https://images.unsplash.com/photo-1763558978011-55404124a148?w=600'),
+('NOCH-00020','Men''s Sport Performance Shirt',  'Moisture-wicking performance shirt.',       37.00, 110, 'Men',   'Black',      'Active', 'Men, Tops',        'https://images.unsplash.com/photo-1762331655528-4af4bccf7c62?w=600'),
+('NOCH-00021','Women''s Silk Scarf',             'Luxurious silk scarf in warm mustard.',     54.00, 40,  'Women', 'Mustard',    'Active', 'Women, Accessories','https://images.unsplash.com/photo-1594938298603-c8148c4b4dc4?w=600');
+
+-- ============================================================
+-- END OF SCHEMA
+-- ============================================================</sql><current_tab id="0"/></tab_sql></sqlb_project>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="app.product.controller.CustomerShopController"
+            fx:id="rootPane"
+            styleClass="shop-root">
+
+    <top>
+        <HBox styleClass="shop-header" alignment="CENTER_LEFT" prefHeight="64">
+            <padding><Insets top="0" right="40" bottom="0" left="40"/></padding>
+
+            <Label text="N O C H" styleClass="shop-brand-left"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <HBox alignment="CENTER_RIGHT" spacing="28">
+                <Button fx:id="favouritesBtn" text="Favourites"
+                        styleClass="nav-link-btn"
+                        onAction="#onFavourites"/>
+                <Button fx:id="checkoutBtn" text="Checkout"
+                        styleClass="nav-link-btn"
+                        onAction="#onCheckout"/>
+                <Button text="Logout" styleClass="logout-btn"
+                        onAction="#onLogout"/>
+            </HBox>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="shop-scroll" hbarPolicy="NEVER">
+            <VBox>
+
+                <StackPane fx:id="heroPane" prefHeight="520" minHeight="400">
+                    <Region fx:id="heroOverlay" styleClass="hero-overlay"/>
+                    <VBox alignment="BOTTOM_CENTER" spacing="10">
+                        <padding><Insets bottom="60"/></padding>
+                        <Label text="NEW ARRIVALS" styleClass="hero-title"/>
+                        <Label text="Discover timeless pieces for your wardrobe"
+                               styleClass="hero-subtitle"/>
+                    </VBox>
+                </StackPane>
+
+                <VBox styleClass="products-section">
+                    <padding><Insets top="56" right="48" bottom="60" left="48"/></padding>
+
+                    <HBox alignment="CENTER">
+                        <VBox.margin><Insets bottom="16"/></VBox.margin>
+                        <VBox spacing="6" alignment="CENTER" HBox.hgrow="ALWAYS">
+                            <Label text="All Clothing" styleClass="section-title"/>
+                            <Label text="EXPLORE OUR COLLECTION" styleClass="section-subtitle"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="16">
+                        <VBox.margin><Insets bottom="28"/></VBox.margin>
+                        <Button fx:id="filterBtn" text="Filters  ▾"
+                                styleClass="customer-filter-btn"
+                                onAction="#onFilter"/>
+                        <Label fx:id="productCountLabel" text="0 products"
+                               styleClass="product-count-label"/>
+                    </HBox>
+
+                    <Label fx:id="noProductsLabel"
+                           text="No products match your filters."
+                           styleClass="empty-label"
+                           visible="false" managed="true">
+                        <VBox.margin><Insets top="60" bottom="60"/></VBox.margin>
+                    </Label>
+
+                    <FlowPane fx:id="productGrid"
+                              hgap="28" vgap="36"
+                              alignment="CENTER"
+                              styleClass="product-flow-pane"/>
+                </VBox>
+
+                <VBox styleClass="footer-section" alignment="CENTER">
+                    <padding><Insets top="52" right="24" bottom="52" left="24"/></padding>
+                    <Label text="N O C H" styleClass="footer-brand">
+                        <VBox.margin><Insets bottom="16"/></VBox.margin>
+                    </Label>
+                    <Label wrapText="true" alignment="CENTER"
+                           styleClass="footer-desc"
+                           text="Minimalist clothing and timeless essentials for every wardrobe.&#10;Crafted with care, designed for longevity."/>
+                    <Separator styleClass="footer-sep">
+                        <VBox.margin><Insets top="32" bottom="24"/></VBox.margin>
+                    </Separator>
+                    <Label text="© 2025 Noch. All rights reserved."
+                           styleClass="footer-copy"/>
+                </VBox>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

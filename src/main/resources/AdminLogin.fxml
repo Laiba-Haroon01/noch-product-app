@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:controller="app.product.controller.AdminLoginController"
+           styleClass="login-root"
+           minWidth="600" minHeight="700">
+
+    <VBox alignment="CENTER"
+          maxWidth="420" minWidth="420"
+          spacing="0"
+          StackPane.alignment="CENTER">
+
+        <padding><Insets top="80" right="48" bottom="80" left="48"/></padding>
+
+        <!-- Logo -->
+        <VBox alignment="CENTER" spacing="10">
+            <VBox.margin><Insets bottom="48"/></VBox.margin>
+            <Label text="N O C H"
+                   styleClass="brand-title"
+                   maxWidth="Infinity"
+                   alignment="CENTER"
+                   textAlignment="CENTER"/>
+            <Label fx:id="subtitleLabel"
+                   text="CUSTOMER ACCESS"
+                   styleClass="brand-subtitle"
+                   maxWidth="Infinity"
+                   alignment="CENTER"
+                   textAlignment="CENTER"/>
+        </VBox>
+
+        <!-- Toggle buttons -->
+        <HBox spacing="10" alignment="CENTER">
+            <HBox.margin><Insets bottom="32"/></HBox.margin>
+            <Button fx:id="customerBtn" text="CUSTOMER"
+                    styleClass="toggle-btn,toggle-btn-active"
+                    onAction="#onCustomerBtn"
+                    prefWidth="155" prefHeight="46"
+                    alignment="CENTER"/>
+            <Button fx:id="staffBtn" text="STAFF"
+                    styleClass="toggle-btn,toggle-btn-inactive"
+                    onAction="#onStaffBtn"
+                    prefWidth="155" prefHeight="46"
+                    alignment="CENTER"/>
+        </HBox>
+
+        <!-- Email -->
+        <VBox spacing="8" maxWidth="Infinity">
+            <VBox.margin><Insets top="16" bottom="16"/></VBox.margin>
+            <Label text="Email Address" styleClass="field-label"/>
+            <TextField fx:id="emailField"
+                       promptText="customer@email.com"
+                       styleClass="input-field"
+                       maxWidth="Infinity"/>
+            <Label fx:id="emailErrorLabel"
+                   text=""
+                   styleClass="error-label"
+                   visible="false" managed="false"
+                   maxWidth="Infinity"/>
+        </VBox>
+
+        <!-- Password -->
+        <VBox spacing="8" maxWidth="Infinity">
+            <VBox.margin><Insets bottom="24"/></VBox.margin>
+            <Label text="Password" styleClass="field-label"/>
+            <PasswordField fx:id="passwordField"
+                           promptText="Enter your password"
+                           styleClass="input-field"
+                           maxWidth="Infinity"/>
+            <Label fx:id="passwordErrorLabel"
+                   text=""
+                   styleClass="error-label"
+                   visible="false" managed="false"
+                   maxWidth="Infinity"/>
+        </VBox>
+
+        <!-- Login button -->
+        <Button text="LOGIN"
+                styleClass="login-btn"
+                onAction="#onLogin"
+                maxWidth="Infinity"
+                prefHeight="52">
+            <VBox.margin><Insets bottom="12"/></VBox.margin>
+        </Button>
+
+        <!-- Autofill button -->
+        <Button fx:id="autofillBtn"
+                text="Auto-fill credentials"
+                styleClass="autofill-btn"
+                onAction="#onAutofill"
+                maxWidth="Infinity"
+                prefHeight="44">
+            <VBox.margin><Insets bottom="28"/></VBox.margin>
+        </Button>
+
+        <!-- Footer -->
+        <Label fx:id="footerLabel"
+               text="Welcome to Noch"
+               styleClass="login-footer"
+               maxWidth="Infinity"
+               alignment="CENTER"
+               textAlignment="CENTER"/>
+    </VBox>
+</StackPane>

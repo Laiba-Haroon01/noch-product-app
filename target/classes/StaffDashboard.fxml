@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="app.product.controller.StaffDashboardController"
+            styleClass="dashboard-root">
+
+    <top>
+        <HBox styleClass="dashboard-header" alignment="CENTER_LEFT">
+            <padding><Insets top="16" right="28" bottom="16" left="28"/></padding>
+            <Label text="N O C H   S T A F F" styleClass="brand-title-sm"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Logout" styleClass="logout-btn" onAction="#onLogout"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="dashboard-scroll">
+            <VBox spacing="0">
+                <padding><Insets top="32" right="32" bottom="32" left="32"/></padding>
+
+                <VBox spacing="6">
+                    <VBox.margin><Insets bottom="28"/></VBox.margin>
+                    <Label text="Product Management" styleClass="page-title"/>
+                    <Label text="Manage your product catalogue" styleClass="page-subtitle"/>
+                </VBox>
+
+                <VBox styleClass="filter-card" spacing="14">
+                    <VBox.margin><Insets bottom="24"/></VBox.margin>
+                    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+                    <HBox alignment="CENTER_LEFT" spacing="10" styleClass="search-wrapper">
+                        <padding><Insets left="12" right="12"/></padding>
+                        <Label text="🔍" style="-fx-font-size:14px;-fx-text-fill:#aaaaaa;"/>
+                        <TextField fx:id="searchField"
+                                   promptText="Search by name or product ID..."
+                                   styleClass="search-field-inline"
+                                   HBox.hgrow="ALWAYS"/>
+                    </HBox>
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <ComboBox fx:id="categoryCombo"
+                                  styleClass="filter-combo-dark"
+                                  prefHeight="44"
+                                  HBox.hgrow="ALWAYS"
+                                  maxWidth="Infinity"/>
+                        <ComboBox fx:id="availabilityCombo"
+                                  styleClass="filter-combo-dark"
+                                  prefHeight="44"
+                                  prefWidth="220"/>
+                        <Button fx:id="addProductBtn"
+                                text="+ Add Product"
+                                styleClass="add-product-btn"
+                                onAction="#onAddProduct"
+                                prefHeight="44"/>
+                    </HBox>
+                </VBox>
+
+                <TableView fx:id="productTable"
+                           styleClass="product-table"
+                           prefHeight="580">
+                    <columns>
+                        <TableColumn fx:id="colProductNum" text="PRODUCT ID"    prefWidth="160"/>
+                        <TableColumn fx:id="colName"       text="PRODUCT NAME"  prefWidth="360"/>
+                        <TableColumn fx:id="colCategory"   text="CATEGORY"      prefWidth="230"/>
+                        <TableColumn fx:id="colPrice"      text="PRICE"         prefWidth="130"/>
+                        <TableColumn fx:id="colStock"      text="STOCK"         prefWidth="130"/>
+                        <TableColumn fx:id="colStatus"     text="STATUS"        prefWidth="160"/>
+                        <TableColumn fx:id="colActions"    text="ACTIONS"       prefWidth="260"/>
+                    </columns>
+                    <placeholder>
+                        <Label text="No products found." styleClass="empty-label"/>
+                    </placeholder>
+                </TableView>
+
+                <Label fx:id="statsLabel"
+                       text="Showing 0 of 0 products"
+                       styleClass="stats-label">
+                    <VBox.margin><Insets top="12"/></VBox.margin>
+                </Label>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+</BorderPane>

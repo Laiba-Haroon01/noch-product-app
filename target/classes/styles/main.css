@@ -1,0 +1,738 @@
+/* ============================================================
+   NOCH – JavaFX Stylesheet
+   ============================================================ */
+
+.root {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+}
+
+.login-root {
+    -fx-background-color: white;
+    -fx-alignment: center;
+    -fx-min-width: 600px;
+    -fx-min-height: 700px;
+}
+
+.brand-title {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111111;
+    -fx-letter-spacing: 6px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.brand-subtitle {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 11px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #888888;
+    -fx-letter-spacing: 4px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.toggle-btn {
+    -fx-pref-height: 46px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-border-width: 1px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-content-display: center;
+}
+
+.toggle-btn-active {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-border-color: #111111;
+    -fx-alignment: center;
+}
+
+.toggle-btn-inactive {
+    -fx-background-color: white;
+    -fx-text-fill: #111111;
+    -fx-border-color: #cccccc;
+    -fx-alignment: center;
+}
+
+.toggle-btn-active:hover  { -fx-background-color: #2a2a2a; }
+.toggle-btn-inactive:hover { -fx-background-color: #f8f8f8; }
+
+.field-label {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #111111;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.input-field {
+    -fx-background-color: #f7f7f7;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-pref-height: 48px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-padding: 0 14px;
+    -fx-text-fill: #111111;
+    -fx-prompt-text-fill: #aaaaaa;
+}
+
+.input-field:focused {
+    -fx-border-color: #111111;
+    -fx-background-color: white;
+}
+
+.input-field.field-error {
+    -fx-border-color: #e53935;
+    -fx-background-color: #fff8f8;
+}
+
+.error-label {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-text-fill: #e53935;
+    -fx-font-size: 12px;
+}
+
+.login-btn {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-letter-spacing: 2px;
+    -fx-pref-height: 52px;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.login-btn:hover { -fx-background-color: #2a2a2a; }
+
+.autofill-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #555555;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-pref-height: 40px;
+    -fx-cursor: hand;
+    -fx-alignment: center;
+}
+
+.autofill-btn:hover {
+    -fx-background-color: #f5f5f5;
+    -fx-text-fill: #111111;
+}
+
+.login-footer {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #888888;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+/* ── Shop ───────────────────────────────────────────────────── */
+.shop-root { -fx-background-color: white; }
+
+.shop-header {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* Brand — centered version (kept for reference) */
+.shop-brand-center {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 6px;
+    -fx-text-fill: #111111;
+}
+
+/* Brand — left-aligned, larger, bold */
+.shop-brand-left {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 6px;
+    -fx-text-fill: #111111;
+}
+
+.brand-title-sm {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 4px;
+    -fx-text-fill: #111111;
+}
+
+/* ── Nav link buttons ────────────────────────────────────────── */
+.nav-link-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #111111;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 4 0;
+}
+
+.nav-link-btn:hover {
+    -fx-text-fill: #555555;
+    -fx-background-color: transparent;
+}
+
+/* ── Customer filter button ──────────────────────────────────── */
+.customer-filter-btn {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 1px;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 10 22;
+}
+
+.customer-filter-btn:hover {
+    -fx-background-color: #333333;
+}
+
+/* ── Filter outline button ───────────────────────────────────── */
+.filter-outline-btn {
+    -fx-background-color: white;
+    -fx-text-fill: #111111;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 8 18;
+}
+
+.filter-outline-btn:hover {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #aaaaaa;
+}
+
+.header-action-btn {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-padding: 8 18;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.header-action-btn:hover { -fx-background-color: #2a2a2a; }
+
+.header-outline-btn {
+    -fx-background-color: transparent;
+    -fx-text-fill: #111111;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8 18;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.header-outline-btn:hover { -fx-background-color: #f5f5f5; }
+
+.hero-section { -fx-background-color: #1a1a1a; }
+.hero-overlay { -fx-background-color: rgba(0,0,0,0.25); }
+
+.hero-title {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 8px;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 8, 0, 0, 2);
+}
+
+.hero-subtitle {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 15px;
+    -fx-text-fill: rgba(255,255,255,0.92);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 1);
+}
+
+.products-section { -fx-background-color: white; }
+
+.section-title {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 42px;
+    -fx-text-fill: #111111;
+}
+
+.section-subtitle {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 11px;
+    -fx-text-fill: #888888;
+    -fx-letter-spacing: 3px;
+}
+
+.filter-btn {
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8 16;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.filter-btn:hover { -fx-background-color: #f5f5f5; }
+
+.product-count-label {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #555555;
+}
+
+.product-flow-pane { -fx-background-color: white; }
+.product-card      { -fx-background-color: white; -fx-cursor: hand; }
+.product-image-container { -fx-background-color: #f2f2f2; }
+
+.heart-btn {
+    -fx-background-color: white;
+    -fx-text-fill: #111111;
+    -fx-font-size: 15px;
+    -fx-background-radius: 50%;
+    -fx-min-width: 34px; -fx-min-height: 34px;
+    -fx-max-width: 34px; -fx-max-height: 34px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 4, 0, 0, 1);
+}
+
+.heart-btn-active {
+    -fx-background-color: white;
+    -fx-text-fill: #e53935;
+    -fx-font-size: 15px;
+    -fx-background-radius: 50%;
+    -fx-min-width: 34px; -fx-min-height: 34px;
+    -fx-max-width: 34px; -fx-max-height: 34px;
+    -fx-cursor: hand;
+}
+
+.product-name {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #111111;
+}
+
+.product-category {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+}
+
+.product-price {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #111111;
+}
+
+.cart-icon-btn {
+    -fx-background-color: transparent;
+    -fx-font-size: 17px;
+    -fx-cursor: hand;
+    -fx-padding: 4 6;
+}
+
+.cart-icon-btn:hover {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 6px;
+}
+
+.footer-section { -fx-background-color: #111111; }
+
+.footer-brand {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-letter-spacing: 4px;
+    -fx-text-fill: white;
+}
+
+.footer-desc {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #999999;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+}
+
+.footer-sep  { -fx-border-color: #333333; -fx-max-width: 800; }
+
+.footer-copy {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-text-fill: #777777;
+}
+
+/* ── Dashboard ───────────────────────────────────────────────── */
+.dashboard-root   { -fx-background-color: #f8f8f8; }
+
+.dashboard-header {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.dashboard-scroll { -fx-background-color: #f8f8f8; }
+
+.sticky-header-section {
+    -fx-background-color: #f8f8f8;
+}
+
+.page-title {
+    -fx-font-family: "Georgia", "Times New Roman", serif;
+    -fx-font-size: 28px;
+    -fx-text-fill: #111111;
+}
+
+.page-subtitle {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #888888;
+}
+
+.filter-card {
+    -fx-background-color: white;
+    -fx-border-color: #eeeeee;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* ── Search wrapper ─────────────────────────────────────────── */
+.search-wrapper {
+    -fx-background-color: #f5f5f5;
+    -fx-border-color: #e8e8e8;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-pref-height: 44px;
+}
+
+.search-field-inline {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #111111;
+    -fx-prompt-text-fill: #aaaaaa;
+    -fx-padding: 0;
+    -fx-pref-height: 44px;
+}
+
+.search-field-inline:focused {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* ── Filter dropdowns ───────────────────────────────────────── */
+.filter-combo-dark {
+    -fx-background-color: #111111;
+    -fx-border-color: #111111;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.filter-combo-dark .combo-box-base {
+    -fx-background-color: #111111;
+    -fx-border-color: #111111;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+}
+
+.filter-combo-dark > .list-cell {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 14;
+    -fx-background-radius: 14px;
+}
+
+.filter-combo-dark .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #111111;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 6 14;
+}
+
+.filter-combo-dark .list-view {
+    -fx-background-color: #111111;
+    -fx-border-color: #333333;
+    -fx-border-radius: 14px;
+    -fx-background-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 4);
+}
+
+.filter-combo-dark .list-view .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #111111;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 8 14;
+    -fx-background-radius: 0;
+}
+
+.filter-combo-dark .list-view .list-cell:hover {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: white;
+}
+
+.filter-combo-dark .list-view .list-cell:filled:selected {
+    -fx-background-color: #333333;
+    -fx-text-fill: white;
+}
+
+.filter-combo-dark .cell:hover,
+.filter-combo-dark .list-cell:hover {
+    -fx-background-color: #2a2a2a;
+    -fx-text-fill: white;
+}
+
+.filter-combo-dark .arrow-button {
+    -fx-background-color: #111111;
+    -fx-border-color: #111111;
+    -fx-background-radius: 0 14px 14px 0;
+    -fx-padding: 0 8;
+}
+
+.filter-combo-dark .arrow-button:hover {
+    -fx-background-color: #2a2a2a;
+}
+
+.filter-combo-dark .arrow {
+    -fx-background-color: white;
+    -fx-scale-x: 0.8;
+    -fx-scale-y: 0.8;
+}
+
+.filter-combo-dark:hover {
+    -fx-background-color: #2a2a2a;
+    -fx-border-color: #2a2a2a;
+}
+
+/* ── Add Product button ─────────────────────────────────────── */
+.add-product-btn {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-background-radius: 14px;
+    -fx-border-radius: 14px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 0 20;
+    -fx-letter-spacing: 1px;
+}
+
+.add-product-btn:hover { -fx-background-color: #333333; }
+
+.dark-btn {
+    -fx-background-color: #111111;
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-pref-height: 42px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-padding: 0 18;
+}
+
+.dark-btn:hover { -fx-background-color: #2a2a2a; }
+
+.dark-combo {
+    -fx-background-color: #111111;
+    -fx-border-color: #111111;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.dark-combo .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: #111111;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+}
+
+.dark-combo .arrow-button { -fx-background-color: transparent; }
+.dark-combo .arrow         { -fx-background-color: white; }
+
+/* ── Table ───────────────────────────────────────────────────── */
+.product-table {
+    -fx-background-color: white;
+    -fx-border-color: #eeeeee;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.product-table .column-header {
+    -fx-background-color: #fafafa;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555555;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-padding: 12 16;
+}
+
+.product-table .column-header .label {
+    -fx-alignment: CENTER;
+    -fx-text-alignment: center;
+}
+
+.product-table .table-row-cell {
+    -fx-border-color: transparent transparent #f5f5f5 transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-color: white;
+}
+
+.product-table .table-row-cell:hover { -fx-background-color: #fafafa; }
+
+.product-table .table-cell {
+    -fx-padding: 12 16;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #111111;
+    -fx-alignment: CENTER;
+}
+
+.stats-label {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.icon-btn {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-padding: 4 8;
+}
+
+.icon-btn:hover {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 6px;
+}
+
+.icon-btn-danger {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+    -fx-text-fill: #e53935;
+    -fx-cursor: hand;
+    -fx-padding: 4 8;
+}
+
+.icon-btn-danger:hover {
+    -fx-background-color: #fdecea;
+    -fx-background-radius: 6px;
+}
+
+.logout-btn {
+    -fx-background-color: white;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8 18;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.logout-btn:hover { -fx-background-color: #f8f8f8; }
+
+.toggle-status-btn {
+    -fx-background-color: transparent;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+    -fx-padding: 4 8;
+    -fx-text-fill: #555555;
+}
+
+.toggle-status-btn:hover {
+    -fx-background-color: #f0f0f0;
+    -fx-background-radius: 4px;
+}
+
+.qty-btn {
+    -fx-background-color: white;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-font-size: 16px;
+    -fx-min-width: 32px;
+    -fx-min-height: 32px;
+    -fx-cursor: hand;
+}
+
+.qty-btn:hover { -fx-background-color: #f5f5f5; }
+
+.empty-label {
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: #888888;
+    -fx-padding: 40;
+}
+
+/* ── ScrollPane ─────────────────────────────────────────────── */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-pane > .viewport      { -fx-background-color: transparent; }
+.shop-scroll > .viewport      { -fx-background-color: white; }
+.dashboard-scroll > .viewport { -fx-background-color: #f8f8f8; }
+
+.search-field {
+    -fx-background-color: #f7f7f7;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-pref-height: 44px;
+    -fx-font-family: "Arial", sans-serif;
+    -fx-font-size: 14px;
+    -fx-padding: 0 14px;
+    -fx-prompt-text-fill: #aaaaaa;
+}
