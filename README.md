@@ -48,6 +48,27 @@ The staff dashboard provides functionality to:
 - Sort product data
 - Manage product information stored in the database
 
+## 📸 Screenshots
+
+### Customer Experience
+
+<p align="center">
+  <img src="homepage.png" width="38%" alt="NOCH Homepage">
+  <img src="customer-shop.png" width="38%" alt="NOCH Customer Shop">
+</p>
+
+### Shopping Basket
+
+<p align="center">
+  <img src="basket.png" width="28%" alt="NOCH Shopping Basket">
+</p>
+
+### Staff Product Management
+
+<p align="center">
+  <img src="staff-dashboard.png" width="70%" alt="NOCH Staff Product Management Dashboard">
+</p>
+
 ## 🛠️ Technologies Used
 
 - **Java 21**
