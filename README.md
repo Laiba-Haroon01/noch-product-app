@@ -125,6 +125,36 @@ This gave me practical experience with:
 - Keeping different components consistent
 - Preparing a complete product for demonstration
 
+## ▶️ How to Run
+
+### Requirements
+
+- Java 21
+- Maven
+
+### Run the application
+
+Clone the repository and navigate into the project folder:
+
+```bash
+git clone https://github.com/Laiba-Haroon01/noch-product-app.git
+cd noch-product-app
+```
+
+Then run:
+
+```bash
+mvn clean javafx:run
+```
+
+The application uses SQLite for local data storage.
+
+### Run the tests
+
+```bash
+mvn test
+```
+
 ## 📚 What I Learned
 
 This project gave me experience with the wider software development process rather than only writing code.
